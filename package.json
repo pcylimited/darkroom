@@ -1,0 +1,19 @@
+{
+  "name": "dark-room",
+  "version": "1.0.0",
+  "description": "Dark room - single player psychological survival horror (three.js web build)",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "vite build && vite preview"
+  },
+  "dependencies": {
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "vite": "^8.3.8"
+  }
+}

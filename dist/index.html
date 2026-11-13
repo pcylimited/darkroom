@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dark room</title>
+  <script type="module" crossorigin src="/assets/index-CGYMjSxg.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-C3DUz7Fi.css">
+</head>
+<body>
+  <canvas id="c"></canvas>
+
+  <div id="hud" class="hidden" aria-live="polite">
+    <div id="reticle"><span class="ring"></span><span class="dot"></span></div>
+    <div id="vitals">
+      <div id="health" aria-label="Health"><i></i><i></i><i></i></div>
+      <div id="battery" aria-label="Torch battery"><span class="cell"><i></i></span><span class="lbl"></span></div>
+      <div id="shelter" class="off">Sheltered</div>
+    </div>
+    <div id="objective"></div>
+    <div id="toast"><b></b><span></span></div>
+    <div id="lampwarn" class="off"><span class="glyph"></span><span class="txt">Lamp failing</span></div>
+    <div id="prompt" class="off">
+      <svg viewBox="0 0 44 44" aria-hidden="true">
+        <circle class="track" cx="22" cy="22" r="19" />
+        <circle class="fill" cx="22" cy="22" r="19" />
+        <line class="mark" x1="22" y1="1" x2="22" y2="6" />
+      </svg>
+      <span class="key"></span>
+      <div class="text"><span class="label"></span><span class="state"></span></div>
+    </div>
+    <div id="hint"></div>
+    <div id="captions"></div>
+  </div>
+
+  <div id="fade"></div>
+
+  <div id="loading" class="screen">
+    <div class="panel center">
+      <h1>Dark room</h1>
+      <p id="loadmsg">Preparing the house…</p>
+    </div>
+  </div>
+
+  <div id="screen-title" class="screen hidden">
+    <div class="titleblock">
+      <h1>Dark room</h1>
+      <p class="tag">Find a way out.</p>
+      <div class="menu">
+        <button id="btn-begin" class="primary">Begin</button>
+        <button id="btn-title-settings">Settings</button>
+      </div>
+      <p class="lan" id="lan"></p>
+      <p class="controls">WASD move · Mouse look · Hold RMB focus torch · Hold E push / interact · Shift sprint · C crouch · F torch · Esc pause</p>
+    </div>
+  </div>
+
+  <div id="screen-pause" class="screen hidden">
+    <div class="panel">
+      <h2>Paused</h2>
+      <div class="menu">
+        <button id="btn-resume" class="primary">Resume</button>
+        <button id="btn-settings">Settings</button>
+        <button id="btn-checkpoint">Restart from checkpoint</button>
+        <button id="btn-restart">Restart level</button>
+      </div>
+      <h3>Rooms found</h3>
+      <ul id="roomlist"></ul>
+    </div>
+  </div>
+
+  <div id="screen-settings" class="screen hidden">
+    <div class="panel wide">
+      <h2>Settings</h2>
+      <div class="cols">
+        <div>
+          <h3>Display</h3>
+          <label>Brightness <input type="range" id="set-brightness" min="0.7" max="1.7" step="0.02" /></label>
+          <p class="note">Raise it until you can just make out the edges of the room beyond the lamplight.</p>
+          <label>Graphics quality
+            <select id="set-quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option><option value="ultra">Ultra</option></select>
+          </label>
+          <p class="note">Changing quality reloads the game.</p>
+          <label class="check"><input type="checkbox" id="set-flash" /> Reduced flashing</label>
+          <h3>Sound</h3>
+          <label>Volume <input type="range" id="set-volume" min="0" max="1" step="0.02" /></label>
+          <label class="check"><input type="checkbox" id="set-subs" /> Subtitles for sounds</label>
+          <label class="check"><input type="checkbox" id="set-dir" /> Directional captions</label>
+        </div>
+        <div>
+          <h3>Controls</h3>
+          <label>Camera sensitivity <input type="range" id="set-sens" min="0.3" max="2.5" step="0.05" /></label>
+          <label class="check"><input type="checkbox" id="set-invert" /> Invert vertical look</label>
+          <label class="check"><input type="checkbox" id="set-holdfocus" /> Hold to focus (off: toggle)</label>
+          <label class="check"><input type="checkbox" id="set-holdpush" /> Hold to push (off: toggle)</label>
+          <div id="binds"></div>
+          <p class="note">Controller: sticks move and look, left trigger focus, X / Square interact, left stick press sprint, B / Circle crouch, D-pad up torch.</p>
+        </div>
+      </div>
+      <div class="menu row"><button id="btn-settings-back" class="primary">Back</button><button id="btn-binds-reset">Reset controls</button></div>
+    </div>
+  </div>
+
+  <div id="screen-dead" class="screen hidden">
+    <div class="panel center">
+      <h2>The dark took you</h2>
+      <p id="deadmsg">Returning to the last safe light.</p>
+      <div class="menu"><button id="btn-continue" class="primary">Continue</button></div>
+    </div>
+  </div>
+
+  <div id="screen-complete" class="screen hidden">
+    <div class="panel center">
+      <h1>Outside</h1>
+      <p class="tag">You found a way out.</p>
+      <p id="stats"></p>
+      <div class="menu"><button id="btn-again" class="primary">Play again</button></div>
+    </div>
+  </div>
+
+  <div id="fatal" class="screen hidden"><div class="panel center"><h2>Could not start</h2><p id="fatalmsg"></p></div></div>
+</body>
+</html>
